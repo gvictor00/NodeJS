@@ -1,11 +1,4 @@
-//Importa a biblioteca Express
-var express = require('express');
-
-//Executa a função contida na variável express
-var app = express();
-
-//Notifica ao Express que vamos usar o EJS para gerar as views
-app.set('view engine','ejs');
+var app = require('./config/server');
 
 app.get('/', function(req, res){
 	//Forma de chamada do bloco sobre tecnologia do EJS

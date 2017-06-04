@@ -15,8 +15,13 @@ sudo npm install -g nodemoon
 ```shell
 sudo apt-get install mysql-server
 ```
+### Utilizando o MySQL
+```shell
+mysql -u root -p
+```
+
 ## Para fazer a verificação e gerenciamento do status do `MySQL`.
 ```shell
 service mysql status
-service mysql start/stop //Inicia ou para o serviço do MySQL no sistema (linux)
+service mysql start/stop
 ```

@@ -1,16 +1,11 @@
+var dbConnection = require('../../config/dbConnection'); // Navega até pasta raiz e depois vai para config
+
 module.exports = function(app){
 
-	app.get('/noticias', function(req, res){
-		//Importa o módulo MySQL para comunicação da aplicação com o banco
-		var mysql = require('mysql');
+	// Executa a função retornada
+	var connection = dbConnection();
 
-		var connection = mysql.createConnection({ // Recebe um JSON para criar conexão
-		//	key: "value", 
-			host : 'localhost', //Endereço onde está o banco
-			user : 'root', 		//Usuário padrão do MySQL
-			password : 'root',
-			database : 'portal_noticias', //Database usada armazenar/recuperar noticias	
-		});
+	app.get('/noticias', function(req, res){
 
 		//<sql> = Requisição SQL em si
 		//<func callback> = Ação executada com a informação recuperada

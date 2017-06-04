@@ -4,5 +4,8 @@ var express = require('express');
 var app = express();
 //Notifica ao Express que vamos usar o EJS para gerar as views
 app.set('view engine','ejs');
+//A pesquisa da pasta VIEWS é feita a partir do nível do diretório onde
+//está o app.js
+app.set('views', './app/views');
 // Informa o que é que o módulo fornece como informação
 module.exports = app;

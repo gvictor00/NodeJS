@@ -1,18 +1,17 @@
+//O app.js deve guardar somente informações estruturais do sistema
 var app = require('./config/server');
 
-app.get('/', function(req, res){
-	//Forma de chamada do bloco sobre tecnologia do EJS
-	//O Render busca as informações e arquivos .ejs no caminho especificado.
-	res.render("home/index");
-});
+//Configurando as rotas para as funções
+var rotaNoticias = require('./app/routes/noticias');
+//Executando a função, passando o app POR REFERÊNCIA
+rotaNoticias(app);
 
-app.get('/fomulario_inclusao_noticia', function(req, res){
-	res.render("admin/form_add_noticia");
-});
+//Forma de execução, baseada em COMMONJS
+var rotaHome = require('./app/routes/home')(app);
+//rotaHome(app);
 
-app.get('/noticias', function(req, res){
-	res.render("noticias/noticias");
-});
+var rotaFormInclusaoNoticia = require('./app/routes/formulario_inclusao_noticia');
+rotaFormInclusaoNoticia(app);
 
 //Escuta a porta #, substituindo o createServer da biblioteca HTTP
 app.listen(3000, function(){

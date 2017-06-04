@@ -1,4 +1,3 @@
-
 // Informa o que é que o módulo fornece como informação
 module.exports = function()
 {

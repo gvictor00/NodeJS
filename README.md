@@ -1,13 +1,22 @@
-Curso NodeJS Udemy Academy
+#Curso NodeJS Udemy Academy
 
-Instalando o NPM
+	Arquivos gerados no curso Curso Completo do Desenvolvedor NodeJS e MongoDB
+
+
+#Instalando o NPM
+```shell
 sudo apt-get install npm
-
-Instalando Nodemoon
+```
+#Instalando Nodemoon
+```shell
 sudo npm install -g nodemoon
-
-Instalando MySQL 
+```
+#Instalando MySQL 
+```shell
 sudo apt-get install mysql-server
-
-service mysql status - Verifica o status do serviço no sistema \n
+```
+Para fazer a verificação e gerenciamento do status do `MySQL`.
+```shell
+service mysql status - Verifica o status do serviço no sistema
 service mysql start/stop - Inicia ou para o serviço do MySQL no sistema (linux)
+```

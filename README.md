@@ -1,6 +1,6 @@
 # Curso NodeJS Udemy Academy
 
-	Arquivos gerados no curso Curso Completo do Desenvolvedor NodeJS e MongoDB
+Arquivos gerados no curso Curso Completo do Desenvolvedor NodeJS e MongoDB
 
 
 ## Instalando o NPM
@@ -17,6 +17,6 @@ sudo apt-get install mysql-server
 ```
 ## Para fazer a verificação e gerenciamento do status do `MySQL`.
 ```shell
-service mysql status - Verifica o status do serviço no sistema
-service mysql start/stop - Inicia ou para o serviço do MySQL no sistema (linux)
+service mysql status
+service mysql start/stop //Inicia ou para o serviço do MySQL no sistema (linux)
 ```

@@ -1,7 +1,7 @@
 //Importa o módulo MySQL para comunicação da aplicação com o banco
 var mysql = require('mysql');
 
-module.exports = function(){
+var connMySQL = function(){
 	return connection = mysql.createConnection({ // Recebe um JSON para criar conexao
 	//	key: "value", 
 		host : 'localhost', //Endereço onde está o banco
@@ -9,4 +9,8 @@ module.exports = function(){
 		password : 'root',
 		database : 'portal_noticias', //Database usada armazenar/recuperar noticias	
 	});
+}
+
+module.exports = function(){
+	return connMySQL;
 }

@@ -1,7 +1,7 @@
 # Curso NodeJS Udemy Academy
 
 ## Descrição
-Arquivos gerados no curso Curso Completo do Desenvolvedor NodeJS e MongoDB
+Arquivos gerados no curso Curso Completo do Desenvolvedor NodeJS e MongoDB seguindo design pattern MVC(Model, View e Controller).
 
  - Express - Framework para desenvolvimento para sistemas web para NodeJS
  - EJS - Framework para interpretação de códigos HTML com códigos Javascript embutidos. 

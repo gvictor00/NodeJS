@@ -16,6 +16,7 @@ app.set('views', './app/views');
 consign()
 	.include('app/routes')
 	.then('config/dbConnection.js') //Necessário apontar extensão, para não confundir com diretório.
+	.then('app/models') // Carrega todas as Models do programa
 	.into(app);
 
 // Informa o que é que o módulo fornece como informação

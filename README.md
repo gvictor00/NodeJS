@@ -9,6 +9,7 @@ Arquivos gerados no curso Curso Completo do Desenvolvedor NodeJS e MongoDB segui
  - MySQL - Banco de dados relacional utilizado para armazenar informações
  - NPM - Gerenciador de pacotes para Javascript
  - Consign - Scaneia, recupera e inicializa todos o módulos de rotas, views e outros, atribuindo à aplicação. Autoload de rotas, views e config.
+ - Body Parser - Funciona como um Middleware, encodando o conteúdo do form ou um textarea em um JSON para facilitar a manipulação.
 
 ## Algumas coisas úteis
 
@@ -32,6 +33,10 @@ mysql -u root -p
 ```shell
 npm install consign --save
 ``` 
+### Instalando o body-parser
+```shell
+npm install body-parser --save
+```
 ### Para fazer a verificação e gerenciamento do status do `MySQL`.
 ```shell
 service mysql status

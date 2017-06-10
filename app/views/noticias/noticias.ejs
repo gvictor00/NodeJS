@@ -2,20 +2,20 @@
 <html lang="pt-br">
 <head>
 	<meta charset="utf-8"/>
-	<title>Notícias</title>
+	<title>NotÃ­cias</title>
 </head>
 <body>
-	<h1>Notícias</h1>
+	<h1>NotÃ­cias</h1>
 	<table>
 		<tr>
 			<td>ID</td>
-			<td>Titulo</td>
+			<td>TÃ­tulo</td>
 		</tr>
 
-		<!-- Tudo que está dentro do <% %> será interpretado pelo JS-->
+		<!-- Tudo que est?dentro do <% %> ser?interpretado pelo JS-->
 		<% for(var i=0; i < noticias.length; i++){ %> 
 		<tr>
-		<!-- <%= %> o uso do = serve para deixar claro que é para imprimir na tela o valor da variável -->
+		<!-- <%= %> o uso do = serve para deixar claro que ?para imprimir na tela o valor da vari?el -->
 			<td><%= noticias[i].id_noticias %></td>
 			<td><%= noticias[i].titulo %></td>
 		</tr>

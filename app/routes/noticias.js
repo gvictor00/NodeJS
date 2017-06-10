@@ -7,19 +7,17 @@ module.exports = function(application){
 	//var connection = dbConnection();
 
 	application.get('/noticias', function(req, res){
+
 		//Executa a função que está em application
 		var connection = application.config.dbConnection();
-		//Acessa o módulo noticiasModel;
-		var noticiasModel = application.app.models.noticiasModel;
-		//<sql> = Requisição SQL em si
-		//<func callback> = Ação executada com a informação recuperada
-		//connection.query(<sql>, <func callback>);
-		connection.query('select * from noticias', function(error, result){
-			//res.send(result);
 
+		//Acessa o módulo noticiasModel (Instancia Model);
+		var noticiasModel = application.app.models.noticiasModel;
+
+		noticiasModel.getNoticias(connection, function(error, result){
 			// Envia o JSON para o EJS e é processao na VIEW
 			res.render("noticias/noticias",{noticias : result});
 		});
-		//res.render("noticias/noticias"); // View
+
 	});
 };

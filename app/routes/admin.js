@@ -13,9 +13,9 @@ module.exports = function(application){
 		var connection = application.config.dbConnection();
 
 		//Acessa o módulo noticiasModel (Instancia Model);
-		var noticiasModel = application.app.models.noticiasModel;
+		var noticiasModel = new application.app.models.NoticiasDAO(connection);
 
-		noticiasModel.salvarNoticia(noticia, connection, function(error, result){
+		noticiasModel.salvarNoticia(noticia, function(error, result){
 			// Envia o JSON para o EJS e é processado na VIEW
 			//res.render("noticias/noticias",{noticias : result});
 

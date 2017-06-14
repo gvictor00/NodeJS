@@ -12,7 +12,7 @@ NoticiasDAO.prototype.getNoticia = function(callback){
 };
 
 NoticiasDAO.prototype.salvarNoticia = function(noticia, callback){
-
+	//console.log(noticia);
 	// O MySQL suporta que o insert seja feito através de um JSON e a função SET.
 	// O framework transforma o JSON em String e depois colocar onde tem ?
 	// Considerando que o JSON possua os mesmos rótulos das colunas da tabela

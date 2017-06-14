@@ -10,6 +10,7 @@ Arquivos gerados no curso Curso Completo do Desenvolvedor NodeJS e MongoDB segui
  - NPM - Gerenciador de pacotes para Javascript
  - Consign - Scaneia, recupera e inicializa todos o módulos de rotas, views e outros, atribuindo à aplicação. Autoload de rotas, views e config.
  - Body Parser - Funciona como um Middleware, encodando o conteúdo do form ou um textarea em um JSON para facilitar a manipulação.
+ - Express Validator - Funciona como Middleware para verificação de campos de formulários.
 
 ## Algumas coisas úteis
 
@@ -41,4 +42,8 @@ npm install body-parser --save
 ```shell
 service mysql status
 service mysql start/stop
+```
+### Express Validator
+```shell
+sudo npm install express-validator --save
 ```

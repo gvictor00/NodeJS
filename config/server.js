@@ -4,7 +4,8 @@ var express = require('express');
 var consign = require('consign');
 //Importa a biblioteca Body-Parser
 var bodyParser = require('body-parser');
-
+//Importa a biblioteca Express Validator
+var expressValidator = require('express-validator');
 //Executa a função contida na variável express
 var app = express();
 //Notifica ao Express que vamos usar o EJS para gerar as views
@@ -15,6 +16,9 @@ app.set('views', './app/views');
 
 //Inclui o bodyParser como Middleware e parametriza o urlencoder
 app.use(bodyParser.urlencoded({extended: true}));
+
+//Inclui o Express Validator como Middleware para verificação de campos
+app.use(expressValidator());
 
 // Passa por parâmetro os arquivos para a app.js (Consign)
 consign()

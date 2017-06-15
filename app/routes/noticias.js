@@ -8,16 +8,11 @@ module.exports = function(application){
 
 	application.get('/noticias', function(req, res){
 
-		//Executa a função que está em application
-		var connection = application.config.dbConnection();
+		application.app.controllers.noticias.noticias(application, req, res);
+	});
 
-		//Acessa o módulo noticiasModel (Instancia Model);
-		var noticiasModel = new application.app.models.NoticiasDAO(connection);
-
-		noticiasModel.getNoticias(function(error, result){
-			// Envia o JSON para o EJS e é processao na VIEW
-			res.render("noticias/noticias",{noticias : result});
-		});
+	application.get('/noticia', function(req, res){
+		application.app.controllers.noticias.noticia(application, req, res);
 
 	});
 };

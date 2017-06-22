@@ -1,4 +1,4 @@
-# Curso NodeJS Udemy Academy
+# Portal de Noticias
 
 ## Descrição
 Arquivos gerados no curso Curso Completo do Desenvolvedor NodeJS e MongoDB seguindo design pattern MVC(Model, View e Controller).

@@ -1,5 +1,9 @@
 module.exports.index = function(application, req, res){
-	//Forma de chamada do bloco sobre tecnologia do EJS
-		//O Render busca as informações e arquivos .ejs no caminho especificado.
-		res.render("home/index");
+	
+	var connection = application.config.dbConnection();
+	var noticiasModel = new application.app.models.NoticiasDAO(connection);
+
+	noticiasModel.get5UltimasNoticias(function(error, result){
+		res.render("home/index", {noticias : result});
+	});
 };

@@ -20,7 +20,7 @@ sudo apt-get install npm
 ```
 ### Instalando Nodemoon
 ```shell
-npm install -g nodemoon
+npm install -g nodemon --save
 ```
 ### Instalando MySQL 
 ```shell

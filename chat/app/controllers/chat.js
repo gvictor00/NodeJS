@@ -13,5 +13,12 @@ module.exports.iniciaChat = function(application, req, res){
 		return;
 	}
 
+	//Envia uma mensagem para o cliente
+	//Dá um get na variável "io" que está encapsulada no objeto application
+	application.get('io').emit(
+		'msgParaCliente',
+		{apelido: dadosForm.apelido, mensagem: ' acabou de entrar no chat'}
+		);
+
 	res.render("chat");
 }

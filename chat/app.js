@@ -10,8 +10,10 @@ var server = app.listen(3000, function(){
 /* define o ponto de escuta da porta 3000 */
 var io = require('socket.io').listen(server);
 
-/* criar a conexão por websocket e escuta eventos de conexão*/
+/* cria variavel global, dentro do objeto app, usando o express */
+app.set('io', io);
 
+/* criar a conexão por websocket e escuta eventos de conexão*/
 io.on('connection', function(socket){
 	console.log('Usuário conectou');
 

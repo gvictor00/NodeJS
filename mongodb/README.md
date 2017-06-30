@@ -45,6 +45,7 @@ mongod --help for help and startup options
 ```
 
 Criamos a pasta **/data/db** e damos os devidos direitos
+
 ```shell
 $ sudo mkdir -p /data/db
 $ sudo chown mongodb /data/db
@@ -53,6 +54,7 @@ $ sudo chown -R mognodb:mognodb /data/db
 ```
 
 ### Para executar o mongoDB
+
 ```shell
 $ sudo mongod
 mongod --help for help and startup options
@@ -69,6 +71,7 @@ mongod --help for help and startup options
 ```
 
 ### Para executar o cliente MongoDB
+
 ```shell
 $ mongo
 MongoDB shell version: 2.6.10
@@ -80,4 +83,37 @@ For more comprehensive documentation, see
 Questions? Try the support group
 	http://groups.google.com/group/mongodb-user
 > 
+```
+
+## Utilizando o MongoDB
+Depois de iniciar o cliente através do comando
+
+```shell
+$ mongo
+```
+Temos as seguintes funções:
+1. Exibe as databases
+```shell
+> show dbs;
+admin  (empty)
+local  0.078GB
+```
+2. Troca entre as databases ou cria uma nova
+```shell
+> use curso_mongodb
+switched to db curso_mongodb
+>
+```
+3. Inserir no banco
+```shell
+> db.alunos.save({Nome: "George"})
+WriteResult({ "nInserted" : 1 })
+```
+4. Remover banco de dados
+Para remover, é preciso acessar o banco e dar um drop
+```shell
+> use curso_mongodb
+switched to db curso_mongodb
+> db.dropDatabase();
+{ "dropped" : "curso_mongodb", "ok" : 1 }
 ```

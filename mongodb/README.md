@@ -117,3 +117,19 @@ switched to db curso_mongodb
 > db.dropDatabase();
 { "dropped" : "curso_mongodb", "ok" : 1 }
 ```
+5. Criando coleções
+```shell
+> db.createCollection("alunos"); # Cria coleção
+{ "ok" : 1 }
+> db.getCollectionNames() 		 # Exibe as coleções
+[ "alunos"]
+> db.createCollection("cursos");
+{ "ok" : 1 }
+> db.getCollectionNames()
+[ "alunos", "cursos"]
+> db.cursos.drop(); 			 # Deleta a coleção
+true
+> db.getCollectionNames()
+[ "alunos"]
+> 
+```

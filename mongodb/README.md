@@ -1,6 +1,6 @@
 # MongoDB
-
-## Instalação e Download
+Banco de dados não relacional muito utilizados em ferramentas atuais.
+## Download, instalação e configuração
 
 Para instalar o MongoDB no linux é necessário verificar se não existe nenhuma vesão prévia do banco. Para tal, basta executar a instrução mongod e verificar o retorno.
 
@@ -9,7 +9,8 @@ $ mongod
 O programa 'mongod' não está instalado no momento. Você pode instalá-lo digitando:
 sudo apt install mongodb-server
 ```
-## Criando a pasta de arquivos
+
+### Criando a pasta de arquivos
 
 Para utilizar o MongoDB é preciso criar a pasta /data/db ou passar -dbpath como argumento quando iniciar o processo. 
 
@@ -50,7 +51,8 @@ $ sudo chown mongodb /data/db
 $ sudo chown -R $USER /data/db
 $ sudo chown -R mognodb:mognodb /data/db
 ```
-## Para executar o mongoDB
+
+### Para executar o mongoDB
 ```shell
 $ sudo mongod
 mongod --help for help and startup options
@@ -66,7 +68,7 @@ mongod --help for help and startup options
 2017-06-30T12:15:51.384-0300 [initandlisten] waiting for connections on port 27017
 ```
 
-## Para executar o cliente MongoDB
+### Para executar o cliente MongoDB
 ```shell
 $ mongo
 MongoDB shell version: 2.6.10

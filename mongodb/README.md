@@ -369,6 +369,10 @@ Substitui um documento, caso ele exista, ou cria um novo através da chave `_id`
 ### 9. Removendo documentos
 `.remove({critério de exclusão}, justone)`
 
+* **Critério de exclusão**: Como o nome ja diz, são as condições que precisam ser satisfeitas para que a remoção seja realizada.
+* **justone**: É um campo que define se apenas o primeiro documento vai ser removido ou todos os documentos irão ser apagados quando o critério de exclusão for satisfeito. Os valores podem ser `true (1)` para remover todos ou `false (0)` para remover apenas o primeiro documento.
+
+
 ```shell
 > db.alunos.remove({nome:'Maria'})
 WriteResult({ "nRemoved" : 1 })

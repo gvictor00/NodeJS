@@ -1,0 +1,148 @@
+1) Crie um banco de dados chamado biblioteca
+
+> use biblioteca
+switched to db biblioteca
+
+2) Crie uma coleção (collection) chamada livros
+
+> db.createCollection("documentos");
+{ "ok" : 1 }
+
+3) Crie os sequintes documentos:
+
+título: Introdução a linguagem de marcação HTML
+valor: 25.00
+Autor: João
+
+> db.documentos.save(
+... {
+... título: "Introdução a linguagem de marcação HTML",
+... valor: 25.00,
+... Autor: "João"
+... }
+... )
+WriteResult({ "nInserted" : 1 })
+
+--
+
+título: NodeJS do básico ao avançado
+valor: 280.00
+Autor: Jorge
+
+> db.documentos.save(
+... {
+... título: "NodeJS do básico ao avançado",
+... valor: 280.00,
+... Autor: "Jorge"
+... }
+... )
+WriteResult({ "nInserted" : 1 })
+
+--
+
+título: Android - criando apps reais
+valor: 290.00
+Autor: Jamilton
+
+> db.documentos.save({ título: "Android - criando apps reais", valor: 290.00, Autor: "Jamilton" })
+WriteResult({ "nInserted" : 1 })
+
+--
+
+título: PHP e MySQL
+valor: 190.00
+Autor: Fernando
+
+> db.documentos.save( { título: "PHP e MySQL", valor: 190.00, Autor: "Fernando" } )
+WriteResult({ "nInserted" : 1 })
+
+--
+
+título: Lógica de Pormogração
+valor: 20.00
+Autor: Maria
+
+> db.documentos.save( { título: "Lógica de Programação", valor: 20.00, Autor: "Maria" } )
+WriteResult({ "nInserted" : 1 })
+
+
+4) Crie as seguintes consultas:
+
+Crie uma consulta que retorne apenas os documentos de livros com valores superiores a 200.00
+
+> db.documentos.find({valor: {$gt: 200}}).pretty()
+{
+	"_id" : ObjectId("595a686c12db44042f32117e"),
+	"título" : "Android - criando apps reais",
+	"valor" : 290,
+	"Autor" : "Jamilton"
+}
+{
+	"_id" : ObjectId("595a68e912db44042f32117f"),
+	"título" : "NodeJS do básico ao avançado",
+	"valor" : 280,
+	"Autor" : "Jorge"
+}
+
+
+Crie uma consulta que retorne apenas os documentos com valores entre 10 e 30
+
+> db.documentos.find({valor: {$gt: 10},valor: {$lt: 30}}).pretty()
+{
+	"_id" : ObjectId("595a681012db44042f32117d"),
+	"título" : "Introdução a linguagem de marcação HTML",
+	"valor" : 25,
+	"Autor" : "João"
+}
+{
+	"_id" : ObjectId("595a69523da64bd0a696034d"),
+	"título" : "Lógica de Programação",
+	"valor" : 20,
+	"Autor" : "Maria"
+}
+
+
+Crie uma consulta que retorne todos os documentos, executo aqueles cujo autor seja Fernando
+
+> db.documentos.find({Autor:{$ne: "Fernando"}}).pretty();
+{
+	"_id" : ObjectId("595a681012db44042f32117d"),
+	"título" : "Introdução a linguagem de marcação HTML",
+	"valor" : 25,
+	"Autor" : "João"
+}
+{
+	"_id" : ObjectId("595a686c12db44042f32117e"),
+	"título" : "Android - criando apps reais",
+	"valor" : 290,
+	"Autor" : "Jamilton"
+}
+{
+	"_id" : ObjectId("595a68e912db44042f32117f"),
+	"título" : "NodeJS do básico ao avançado",
+	"valor" : 280,
+	"Autor" : "Jorge"
+}
+{
+	"_id" : ObjectId("595a69523da64bd0a696034d"),
+	"título" : "Lógica de Programação",
+	"valor" : 20,
+	"Autor" : "Maria"
+}
+
+5) Atualize os seguintes documentos:
+
+Atualize o documento cujo o título é PHP e MySQL, passando seu valor de 190.00 para 175.00
+
+Atualize o documento cujo autor é Jorge, passando seu título para Curso Completo de NodeJS
+
+Atualize todos os documentos cujo valor são iguais ou inferiores a 25.00 para o valor 27.00
+
+
+6) Remove os seguintes documentos:
+
+Remova o documento cujo autor é João
+
+Remova todos os documentos cujo valor é superior a 280.00
+
+Remova todos os documentos cujo valor é inferior a 30.00

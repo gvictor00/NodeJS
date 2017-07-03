@@ -119,17 +119,101 @@ switched to db curso_mongodb
 ```
 5. Criando coleções
 ```shell
-> db.createCollection("alunos"); # Cria coleção
+> db.createCollection("alunos");	# Cria coleção
 { "ok" : 1 }
-> db.getCollectionNames() 		 # Exibe as coleções
+> db.getCollectionNames() 		 	# Exibe as coleções
 [ "alunos"]
 > db.createCollection("cursos");
 { "ok" : 1 }
 > db.getCollectionNames()
 [ "alunos", "cursos"]
-> db.cursos.drop(); 			 # Deleta a coleção
+> db.cursos.drop(); 			 	# Deleta a coleção
 true
-> db.getCollectionNames()
+> db.getCollectionNames() 			
 [ "alunos"]
+> show collections; 				# Exibe as coleções
+alunos
 > 
+```
+6. Adicionando itens à coleção
+```shell
+> db.alunos.save(
+... {
+... nome: 'José',
+... idade: 30,
+... sexo: 'M',
+... cpf: '123.123.123-12',
+... rg: '123.123.123-1',
+... matricula: 'abcd123'
+... }
+... )
+WriteResult({ "nInserted" : 1 })
+> db.alunos.save(
+... {
+... nome: 'Fernanda',
+... idade: 32,
+... sexo: 'F'
+... ,
+... matricula: 'hjk456',
+... cursos_interesse: [
+... {
+... curso: 'Curso Completo do Desenvolvedor NodeJS'},
+... {curso: 'Curso Completo de Desenvolvimento WEB - Crie 6 projetos'}
+... ]
+... }
+... )
+WriteResult({ "nInserted" : 1 })
+```
+7. Busca documentos na coleção
+7.1 `db.COLEÇÃO.findOne();` retorna apenas 1 documento
+```shell
+> db.alunos.findOne(); 				# Retorna um documento
+{
+	"_id" : ObjectId("595a40de400947f533bbf92a"),
+	"nome" : "José",
+	"idade" : 30,
+	"sexo" : "M",
+	"cpf" : "123.123.123-12",
+	"rg" : "123.123.123-1",
+	"matricula" : "abcd123"
+}
+```
+7.2 `db.alunos.find()` retorna todos os documentos da coleção
+```shell
+> db.alunos.find(); 				# Retorna todos os documentos
+{ "_id" : ObjectId("595a40de400947f533bbf92a"), "nome" : "José", "idade" : 30, "sexo" : "M", "cpf" : "123.123.123-12", "rg" : "123.123.123-1", "matricula" : "abcd123" }
+{ "_id" : ObjectId("595a416a400947f533bbf92b"), "nome" : "Maria", "idade" : 25, "sexo" : "F", "matricula" : "uio123" }
+{ "_id" : ObjectId("595a41d1400947f533bbf92c"), "nome" : "Fernanda", "idade" : 32, "sexo" : "F", "matricula" : "hjk456", "cursos_interesse" : [ { "curso" : "Curso Completo do Desenvolvedor NodeJS" }, { "curso" : "Curso Completo de Desenvolvimento WEB - Crie 6 projetos" } ] }
+> db.alunos.find().pretty();		# Retorna todos os documentos indentados
+{
+	"_id" : ObjectId("595a40de400947f533bbf92a"),
+	"nome" : "José",
+	"idade" : 30,
+	"sexo" : "M",
+	"cpf" : "123.123.123-12",
+	"rg" : "123.123.123-1",
+	"matricula" : "abcd123"
+}
+{
+	"_id" : ObjectId("595a416a400947f533bbf92b"),
+	"nome" : "Maria",
+	"idade" : 25,
+	"sexo" : "F",
+	"matricula" : "uio123"
+}
+{
+	"_id" : ObjectId("595a41d1400947f533bbf92c"),
+	"nome" : "Fernanda",
+	"idade" : 32,
+	"sexo" : "F",
+	"matricula" : "hjk456",
+	"cursos_interesse" : [
+		{
+			"curso" : "Curso Completo do Desenvolvedor NodeJS"
+		},
+		{
+			"curso" : "Curso Completo de Desenvolvimento WEB - Crie 6 projetos"
+		}
+	]
+}
 ```

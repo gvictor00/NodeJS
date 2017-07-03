@@ -322,7 +322,7 @@ WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
 WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
 ```
 ```shell
-> db.alunos.update({nome:"Maria"},{$set:{sexo:"F",idade:26}},{multi:true});
+> db.alunos.update({sexo:"F"},{$set:{sexo:"Feminino"}},{multi:true});
 WriteResult({ "nMatched" : 2, "nUpserted" : 0, "nModified" : 2 })
 ```
 
@@ -365,3 +365,59 @@ Ao dar um `.find()`, temos:
 
 #### 8.2 Através de `.save()`
 Substitui um documento, caso ele exista, ou cria um novo através da chave `_id`.
+
+### 9. Removendo documentos
+`.remove({critério de exclusão}, justone)`
+
+```shell
+> db.alunos.remove({nome:'Maria'})
+WriteResult({ "nRemoved" : 1 })
+>
+> db.alunos.find().pretty();
+{
+	"_id" : ObjectId("595a40de400947f533bbf92a"),
+	"nome" : "João",
+	"idade" : 30,
+	"sexo" : "M",
+	"cpf" : "123.123.123-12",
+	"rg" : "123.123.123-1",
+	"matricula" : "abcd123"
+}
+{
+	"_id" : ObjectId("595a41d1400947f533bbf92c"),
+	"nome" : "Fernanda",
+	"idade" : 32,
+	"sexo" : "Feminino",
+	"matricula" : "hjk456",
+	"cursos_interesse" : [
+		{
+			"curso" : "Curso Completo do Desenvolvedor NodeJS"
+		},
+		{
+			"curso" : "Curso Completo de Desenvolvimento WEB - Crie 6 projetos"
+		}
+	]
+}
+```
+```shell
+> db.alunos.remove({idade:{$gt:30}});
+WriteResult({ "nRemoved" : 1 })
+>
+> db.alunos.find().pretty();
+{
+	"_id" : ObjectId("595a40de400947f533bbf92a"),
+	"nome" : "João",
+	"idade" : 30,
+	"sexo" : "M",
+	"cpf" : "123.123.123-12",
+	"rg" : "123.123.123-1",
+	"matricula" : "abcd123"
+}
+```
+```shell
+> db.alunos.remove({matricula:{$eq:'abcd123'}});
+WriteResult({ "nRemoved" : 1 })
+> db.alunos.find().pretty();
+>
+>
+```

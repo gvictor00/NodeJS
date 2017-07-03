@@ -305,9 +305,9 @@ Caso a consulta seja `nome = Maria OR nome = José`
 #### 8.1 Através de `.update()`
 `.update({Condição para atualização},{$set valores a alterar},{multi:false/true});`
 
-... Codições para atualização: Como o nome ja diz, são as condições que precisam ser satisfeitas para que o ocorra a atualização
-... Campos a alterar: São os campos que irão sofrer alteração, caso a condição seja satisfeita
-... Multi: Quando é `true`, o banco faz alteração em *todos* os documentos na coleção que satisfaçam a condição de alteração. Já quando é `false`, a alteração é feita somente no *primeiro* documento. Caso o parâmetro de multi não esteja presente, à ele será atribuido o valor de **false**.
+* **Codições para atualização**: Como o nome ja diz, são as condições que precisam ser satisfeitas para que o ocorra a atualização
+* **Campos a alterar**: São os campos que irão sofrer alteração, caso a condição seja satisfeita
+* **Multi**: Quando é `true`, o banco faz alteração em *todos* os documentos na coleção que satisfaçam a condição de alteração. Já quando é `false`, a alteração é feita somente no *primeiro* documento. Caso o parâmetro de multi não esteja presente, à ele será atribuido o valor de **false**.
 
 ```shell
 > db.alunos.update({nome:"José"},{$set:{nome:"João"}});

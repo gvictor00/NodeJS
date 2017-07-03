@@ -261,7 +261,7 @@ Também é possível utilizar operadores lógicos como `AND` ou `OR` para aninha
 | AND | , | db.alunos.find({chave:{op:value},chave:{op:value}})|
 | OR | $or | db.alunos.find({$or:[{chave:{$op:value}},{chave:{op:value}}]})
 
-Caso a consulta seja `sexo = f **and** idade > 30`
+Caso a consulta seja `sexo = f AND idade > 30`
 ```shell
 > db.alunos.find( {sexo:{$eq:"F"}, idade:{$gt:30}} ).pretty();
 {
@@ -280,7 +280,7 @@ Caso a consulta seja `sexo = f **and** idade > 30`
 	]
 }
 ```
-Caso a consulta seja `nome = Maria **or** nome = José`
+Caso a consulta seja `nome = Maria OR nome = José`
 ```shell
 > db.alunos.find({$or:[{nome:{$eq:"Maria"}},{nome:{$eq:"José"}}]}).pretty();
 {
@@ -300,3 +300,68 @@ Caso a consulta seja `nome = Maria **or** nome = José`
 	"matricula" : "uio123"
 }
 ```
+### 8. Atualizando documentos na coleção
+
+#### 8.1 Através de `.update()`
+`.update({Condição para atualização},{$set valores a alterar},{multi:false/true});`
+
+... Codições para atualização: Como o nome ja diz, são as condições que precisam ser satisfeitas para que o ocorra a atualização
+... Campos a alterar: São os campos que irão sofrer alteração, caso a condição seja satisfeita
+... Multi: Quando é `true`, o banco faz alteração em *todos* os documentos na coleção que satisfaçam a condição de alteração. Já quando é `false`, a alteração é feita somente no *primeiro* documento. Caso o parâmetro de multi não esteja presente, à ele será atribuido o valor de **false**.
+
+```shell
+> db.alunos.update({nome:"José"},{$set:{nome:"João"}});
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+```
+```shell
+> db.alunos.update({sexo:"F"},{$set:{sexo:"Feminino"}});
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+```
+```shell
+> db.alunos.update({nome:"Maria"},{$set:{sexo:"F",idade:26}});
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+```
+```shell
+> db.alunos.update({nome:"Maria"},{$set:{sexo:"F",idade:26}},{multi:true});
+WriteResult({ "nMatched" : 2, "nUpserted" : 0, "nModified" : 2 })
+```
+
+Ao dar um `.find()`, temos:
+
+```shell
+> db.alunos.find().pretty();
+{
+	"_id" : ObjectId("595a40de400947f533bbf92a"),
+	"nome" : "João",
+	"idade" : 30,
+	"sexo" : "M",
+	"cpf" : "123.123.123-12",
+	"rg" : "123.123.123-1",
+	"matricula" : "abcd123"
+}
+{
+	"_id" : ObjectId("595a416a400947f533bbf92b"),
+	"nome" : "Maria",
+	"idade" : 26,
+	"sexo" : "Feminino",
+	"matricula" : "uio123"
+}
+{
+	"_id" : ObjectId("595a41d1400947f533bbf92c"),
+	"nome" : "Fernanda",
+	"idade" : 32,
+	"sexo" : "Feminino",
+	"matricula" : "hjk456",
+	"cursos_interesse" : [
+		{
+			"curso" : "Curso Completo do Desenvolvedor NodeJS"
+		},
+		{
+			"curso" : "Curso Completo de Desenvolvimento WEB - Crie 6 projetos"
+		}
+	]
+}
+```
+
+#### 8.2 Através de `.save()`
+Substitui um documento, caso ele exista, ou cria um novo através da chave `_id`.

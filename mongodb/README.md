@@ -222,7 +222,7 @@ Ao utilizarmos o `.pretty()` fornecemos o retorno da função find **indentado**
 	]
 }
 ```
-#### Busca condicional com `db.alunos.find()`
+#### 7.3 Busca condicional com `db.alunos.find()`
 Para os operadores de comparação no MongoDB, tomando como **referência** comandos *MySQL*, temos:
 
 | Operador SQL	| Operador	| Nome	| Operação	|
@@ -253,6 +253,50 @@ Para os operadores de comparação no MongoDB, tomando como **referência** coma
 	"rg" : "123.123.123-1",
 	"matricula" : "abcd123"
 }
-> 
+```
+Também é possível utilizar operadores lógicos como `AND` ou `OR` para aninhar as condições da consulta.
 
+| Operador lógico | Operador | Operação |
+|:---------------:|:--------:|:--------:|
+| AND | , | db.alunos.find({chave:{op:value},chave:{op:value}})|
+| OR | $or | db.alunos.find({$or:[{chave:{$op:value}},{chave:{op:value}}]})
+
+Caso a consulta seja `sexo = f **and** idade > 30`
+```shell
+> db.alunos.find( {sexo:{$eq:"F"}, idade:{$gt:30}} ).pretty();
+{
+	"_id" : ObjectId("595a41d1400947f533bbf92c"),
+	"nome" : "Fernanda",
+	"idade" : 32,
+	"sexo" : "F",
+	"matricula" : "hjk456",
+	"cursos_interesse" : [
+		{
+			"curso" : "Curso Completo do Desenvolvedor NodeJS"
+		},
+		{
+			"curso" : "Curso Completo de Desenvolvimento WEB - Crie 6 projetos"
+		}
+	]
+}
+```
+Caso a consulta seja `nome = Maria **or** nome = José`
+```shell
+> db.alunos.find({$or:[{nome:{$eq:"Maria"}},{nome:{$eq:"José"}}]}).pretty();
+{
+	"_id" : ObjectId("595a40de400947f533bbf92a"),
+	"nome" : "José",
+	"idade" : 30,
+	"sexo" : "M",
+	"cpf" : "123.123.123-12",
+	"rg" : "123.123.123-1",
+	"matricula" : "abcd123"
+}
+{
+	"_id" : ObjectId("595a416a400947f533bbf92b"),
+	"nome" : "Maria",
+	"idade" : 25,
+	"sexo" : "F",
+	"matricula" : "uio123"
+}
 ```

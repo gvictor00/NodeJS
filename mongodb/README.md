@@ -92,24 +92,24 @@ Depois de iniciar o cliente através do comando
 $ mongo
 ```
 Temos as seguintes funções:
-1. Exibe as databases
+### 1. Exibe as databases
 ```shell
 > show dbs;
 admin  (empty)
 local  0.078GB
 ```
-2. Troca entre as databases ou cria uma nova
+### 2. Troca entre as databases ou cria uma nova
 ```shell
 > use curso_mongodb
 switched to db curso_mongodb
 >
 ```
-3. Inserir no banco
+### 3. Inserir no banco
 ```shell
 > db.alunos.save({Nome: "George"})
 WriteResult({ "nInserted" : 1 })
 ```
-4. Remover banco de dados
+### 4. Remover banco de dados
 Para remover, é preciso acessar o banco e dar um drop
 ```shell
 > use curso_mongodb
@@ -117,7 +117,7 @@ switched to db curso_mongodb
 > db.dropDatabase();
 { "dropped" : "curso_mongodb", "ok" : 1 }
 ```
-5. Criando coleções
+### 5. Criando coleções
 ```shell
 > db.createCollection("alunos");	# Cria coleção
 { "ok" : 1 }
@@ -135,7 +135,7 @@ true
 alunos
 > 
 ```
-6. Adicionando itens à coleção
+### 6. Adicionando itens à coleção
 ```shell
 > db.alunos.save(
 ... {
@@ -164,8 +164,9 @@ WriteResult({ "nInserted" : 1 })
 ... )
 WriteResult({ "nInserted" : 1 })
 ```
-7. Busca documentos na coleção
-7.1 `db.COLEÇÃO.findOne();` retorna apenas 1 documento
+### 7. Busca documentos na coleção
+
+#### 7.1 `db.COLEÇÃO.findOne();` retorna apenas 1 documento
 ```shell
 > db.alunos.findOne(); 				# Retorna um documento
 {
@@ -178,7 +179,7 @@ WriteResult({ "nInserted" : 1 })
 	"matricula" : "abcd123"
 }
 ```
-7.2 `db.alunos.find()` retorna todos os documentos da coleção
+#### 7.2 `db.alunos.find()` retorna todos os documentos da coleção
 ```shell
 > db.alunos.find(); 				# Retorna todos os documentos
 { "_id" : ObjectId("595a40de400947f533bbf92a"), "nome" : "José", "idade" : 30, "sexo" : "M", "cpf" : "123.123.123-12", "rg" : "123.123.123-1", "matricula" : "abcd123" }

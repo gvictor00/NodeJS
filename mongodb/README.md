@@ -218,3 +218,37 @@ WriteResult({ "nInserted" : 1 })
 	]
 }
 ```
+#### Busca condicional com `db.alunos.find()`
+Para os operadores de comparação, tomando como **referência** comandos *MySQL*, no MongoDB temos:
+
+| Operador SQL	| Operador	| Nome	| Operação	|
+|:-------------:|:---------:|:-----:|:---------:|
+| = | $eq | Equals | Igual a |
+| > | $gt | Greater Than | Maior que |
+| >= | $gte | Greater Than or Equal | Maior que ou igual |
+| < | $lt | Less Than | Menor que |
+| <= | $lte | Less Than Equal | Menor que ou igual |
+| != / <> | $ne | Not Equal | É diferente |
+
+```shell
+> db.alunos.find({idade:{$lt:30}}).pretty();
+{
+	"_id" : ObjectId("595a416a400947f533bbf92b"),
+	"nome" : "Maria",
+	"idade" : 25,
+	"sexo" : "F",
+	"matricula" : "uio123"
+}
+> db.alunos.find({nome:{$eq: "José"}}).pretty();
+{
+	"_id" : ObjectId("595a40de400947f533bbf92a"),
+	"nome" : "José",
+	"idade" : 30,
+	"sexo" : "M",
+	"cpf" : "123.123.123-12",
+	"rg" : "123.123.123-1",
+	"matricula" : "abcd123"
+}
+> 
+
+```

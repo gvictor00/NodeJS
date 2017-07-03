@@ -2,7 +2,7 @@
 Banco de dados não relacional muito utilizados em ferramentas atuais.
 ## Download, instalação e configuração
 
-Para instalar o MongoDB no linux é necessário verificar se não existe nenhuma vesão prévia do banco. Para tal, basta executar a instrução mongod e verificar o retorno.
+Para instalar o MongoDB no linux é necessário verificar se não existe nenhuma vesão prévia do banco. Para tal, basta executar a instrução `mongod` e verificar o retorno.
 
 ```shell
 $ mongod
@@ -14,7 +14,7 @@ sudo apt install mongodb-server
 
 Para utilizar o MongoDB é preciso criar a pasta /data/db ou passar -dbpath como argumento quando iniciar o processo. 
 
-Para verificar se ela já está criada executamos o mongod
+Para verificar se ela já está criada executamos o `mongod`.
 ```shell
 $ mongod 
 mongod --help for help and startup options
@@ -86,29 +86,28 @@ Questions? Try the support group
 ```
 
 ## Utilizando o MongoDB
-Depois de iniciar o cliente através do comando
+Após de iniciar o banco com o comando `mongo` partimos para utilização do banco e a seguir teremos algumas informações.
 
-```shell
-$ mongo
-```
-Temos as seguintes funções:
 ### 1. Exibe as databases
 ```shell
 > show dbs;
 admin  (empty)
 local  0.078GB
 ```
+
 ### 2. Troca entre as databases ou cria uma nova
 ```shell
 > use curso_mongodb
 switched to db curso_mongodb
 >
 ```
+
 ### 3. Inserir no banco
 ```shell
 > db.alunos.save({Nome: "George"})
 WriteResult({ "nInserted" : 1 })
 ```
+
 ### 4. Remover banco de dados
 Para remover, é preciso acessar o banco e dar um drop
 ```shell
@@ -180,11 +179,16 @@ WriteResult({ "nInserted" : 1 })
 }
 ```
 #### 7.2 `db.alunos.find()` retorna todos os documentos da coleção
+
 ```shell
 > db.alunos.find(); 				# Retorna todos os documentos
 { "_id" : ObjectId("595a40de400947f533bbf92a"), "nome" : "José", "idade" : 30, "sexo" : "M", "cpf" : "123.123.123-12", "rg" : "123.123.123-1", "matricula" : "abcd123" }
 { "_id" : ObjectId("595a416a400947f533bbf92b"), "nome" : "Maria", "idade" : 25, "sexo" : "F", "matricula" : "uio123" }
 { "_id" : ObjectId("595a41d1400947f533bbf92c"), "nome" : "Fernanda", "idade" : 32, "sexo" : "F", "matricula" : "hjk456", "cursos_interesse" : [ { "curso" : "Curso Completo do Desenvolvedor NodeJS" }, { "curso" : "Curso Completo de Desenvolvimento WEB - Crie 6 projetos" } ] }
+```
+Ao utilizarmos o `.pretty()` fornecemos o retorno da função find **indentado**, facilitando a leitura.
+
+```shell
 > db.alunos.find().pretty();		# Retorna todos os documentos indentados
 {
 	"_id" : ObjectId("595a40de400947f533bbf92a"),
@@ -219,7 +223,7 @@ WriteResult({ "nInserted" : 1 })
 }
 ```
 #### Busca condicional com `db.alunos.find()`
-Para os operadores de comparação, tomando como **referência** comandos *MySQL*, no MongoDB temos:
+Para os operadores de comparação no MongoDB, tomando como **referência** comandos *MySQL*, temos:
 
 | Operador SQL	| Operador	| Nome	| Operação	|
 |:-------------:|:---------:|:-----:|:---------:|

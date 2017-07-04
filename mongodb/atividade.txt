@@ -133,16 +133,31 @@ Crie uma consulta que retorne todos os documentos, executo aqueles cujo autor se
 5) Atualize os seguintes documentos:
 
 Atualize o documento cujo o título é PHP e MySQL, passando seu valor de 190.00 para 175.00
+> db.documentos.update( { título: {$eq:"PHP e MySQL"}},{$set:{valor:175}});
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
 
 Atualize o documento cujo autor é Jorge, passando seu título para Curso Completo de NodeJS
+> db.documentos.update({Autor: {$eq:"Jorge"}},{$set:{título:"Curso Completo de NodeJS"}});
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
 
 Atualize todos os documentos cujo valor são iguais ou inferiores a 25.00 para o valor 27.00
+> db.documentos.update({
+... valor: {$lte: 25}},
+... {$set:{valor:27.00}},
+... {multi:true});
+WriteResult({ "nMatched" : 2, "nUpserted" : 0, "nModified" : 2 })
 
 
 6) Remove os seguintes documentos:
 
 Remova o documento cujo autor é João
+> db.documentos.remove({Autor:"João"});
+WriteResult({ "nRemoved" : 1 })
 
 Remova todos os documentos cujo valor é superior a 280.00
+> db.documentos.remove({valor:{$gt: 280}},1);
+WriteResult({ "nRemoved" : 1 })
 
 Remova todos os documentos cujo valor é inferior a 30.00
+> db.documentos.remove({valor:{$lt: 30}},1);
+WriteResult({ "nRemoved" : 1 })

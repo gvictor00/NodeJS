@@ -8,5 +8,8 @@ Consiste em um conteúdo introdutório relacionado ao padrão MVC para desenvolv
 
 ## Atividade #2: Multiroom Chat
 
-Ainda em desenvolvimento, consiste em um Chat com Várias salas, baseado em WebSockets
+Ainda em desenvolvimento, consiste em um Chat com Várias salas, baseado em WebSockets.
 
+## Atividade #3: MMORPG
+
+Desenvolvimento de um MMORPG baseado em Game of Thrones para pratica de conteúdos relacionados à armazenamento e manipulação de dados utilizando MongoDB.

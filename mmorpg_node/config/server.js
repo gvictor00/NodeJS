@@ -10,6 +10,9 @@ var bodyParser = require('body-parser');
 /* importar o módulo do express-validator */
 var expressValidator = require('express-validator');
 
+/* importar o módulo do express-session */
+var expressSession = require('express-session');
+
 /* iniciar o objeto do express */
 var app = express();
 
@@ -25,6 +28,17 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 /* configurar o middleware express-validator */
 app.use(expressValidator());
+
+/* configurar o middleware express-session */
+app.use(expressSession({
+	secret: 'poaskpoaskposakpaskapsokpo',
+	// secret = 'string' > Cadeia de caracateres usada para criação e autenticação do cookie criado
+	resave: false,
+	// resave == true > Sessão é gravada no servidor, mesmo não havendo modificações
+	// resave == false >  Sessão é gravada sempre que houver modificações
+	saveUninitialized: false
+	// saveUninitialized == true > Cria uma nova sessão sempre que houver modificações
+}));
 
 /* efetua o autoload das rotas, dos models e dos controllers para o objeto app */
 consign()

@@ -12,6 +12,11 @@ Como nas atividades anteriores, foi preciso instalar algum package através de N
 $ npm install mongodb --save
 ```
 
+### Instalando Express-Session
+```shell
+$ npm install express-session --save
+```
+
 ## Observações
 
 ### Configurando Path no Windows

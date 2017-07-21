@@ -13,6 +13,9 @@ $ npm install mongodb --save
 ```
 
 ### Instalando Express-Session
+
+O Express-Session serve para criar uma sessão enquanto o navegador estiver aberto. Sempre que o usuário faz a autenticação um cookie é enviado a cada requisição a fim de controlar o acesso à determinadas páginas do jogo. Ao finalizar o navegador (sessão), o usuário precisa fazer novo processo de acesso.
+
 ```shell
 $ npm install express-session --save
 ```

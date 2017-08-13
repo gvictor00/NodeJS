@@ -27,13 +27,13 @@ JogoDAO.prototype.gerarParametros = function(usuario)
 }
 
 
-JogoDAO.prototype.iniciaJogo = function(res, usuario, casa, comando_invalido)
+JogoDAO.prototype.iniciaJogo = function(res, usuario, casa, msg)
 {
 	this._connection.open(function(err, mongoclient){
 		mongoclient.collection("jogo", function(err, collection){
 			collection.find({usuario : usuario}).toArray(function(err, result){
 				console.log(result[0]);
-				res.render('jogo', {img_casa: casa, jogo: result[0], comando_invalido: comando_invalido});
+				res.render('jogo', {img_casa: casa, jogo: result[0], msg: msg});
 			});
 
 			//Finaliza a conexão com o banco
@@ -41,6 +41,36 @@ JogoDAO.prototype.iniciaJogo = function(res, usuario, casa, comando_invalido)
 		});
 	}); 
 }
+
+JogoDAO.prototype.acao = function(acao)
+{
+	//Função fornecida pelo mongoDB
+	this._connection.open(function(err, mongoclient){
+		//Permite manipular documentos dentro das coleções
+		mongoclient.collection("acao", function(err, collection){
+			
+			//Define o periodo que a ação deve ser realizada
+			var date = new Date();
+			var tempo = null;
+			switch(acao.acao)
+			{
+				case 1: tempo = 1 * 60 * 60 * 1000;
+				case 2: tempo = 2 * 60 * 60 * 1000;
+				case 3: tempo = 3 * 60 * 60 * 1000;
+				case 4: tempo = 4 * 60 * 60 * 1000;
+			}
+			//Cria uma nova chave no JSON
+			acao.acao_termina_em = date.getTime() + tempo;
+
+			//Insere, um JSON, no banco
+			collection.insert(acao);
+
+			//Finaliza a conexão com o banco
+			mongoclient.close();
+		});
+	}); 
+}
+
 module.exports = function(){
 	return JogoDAO;
 }

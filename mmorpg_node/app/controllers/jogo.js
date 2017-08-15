@@ -1,7 +1,7 @@
 module.exports.jogo = function(application, req, res){
 
-	if(req.session.autorizado == false)
-	{		
+	if(req.session.autorizado != true)
+	{
 		res.send('Usuário precisa fazer login!');
 		return;
 	}
@@ -28,7 +28,7 @@ module.exports.sair = function(application, req, res){
 }
 
 module.exports.suditos = function(application, req, res){
-	if(req.session.autorizado == false)
+	if(req.session.autorizado != true)
 	{		
 		res.send('Usuário precisa fazer login!');
 		return;
@@ -38,17 +38,22 @@ module.exports.suditos = function(application, req, res){
 }
 
 module.exports.pergaminhos = function(application, req, res){
-	if(req.session.autorizado == false)
+	if(req.session.autorizado != true)
 	{		
 		res.send('Usuário precisa fazer login!');
 		return;
 	}
 
-	res.render("pergaminhos",{validacao:{}});
+	/* Recuperar as ações inseridas no banco de dados */
+	var connection = application.config.dbConnection;
+	var JogoDAO = new application.app.models.JogoDAO(connection);
+	var usuario = req.session.usuario;
+
+	JogoDAO.getAcoes(usuario, res);
 }
 
 module.exports.ordenar_acao_sudito = function(application, req, res){
-	if(req.session.autorizado == false)
+	if(req.session.autorizado != true)
 	{		
 		res.send('Usuário precisa fazer login!');
 		return;

@@ -52,12 +52,12 @@ JogoDAO.prototype.acao = function(acao)
 			//Define o periodo que a ação deve ser realizada
 			var date = new Date();
 			var tempo = null;
-			switch(acao.acao)
+			switch(parseInt(acao.acao))
 			{
-				case 1: tempo = 1 * 60 * 60 * 1000;
-				case 2: tempo = 2 * 60 * 60 * 1000;
-				case 3: tempo = 3 * 60 * 60 * 1000;
-				case 4: tempo = 4 * 60 * 60 * 1000;
+				case 1: tempo = 1 * 60 * 60 * 1000; break;
+				case 2: tempo = 2 * 60 * 60 * 1000; break;
+				case 3: tempo = 3 * 60 * 60 * 1000; break;
+				case 4: tempo = 4 * 60 * 60 * 1000; break;
 			}
 			//Cria uma nova chave no JSON
 			acao.acao_termina_em = date.getTime() + tempo;
@@ -70,6 +70,21 @@ JogoDAO.prototype.acao = function(acao)
 		});
 	}); 
 }
+
+JogoDAO.prototype.getAcoes = function(usuario, res)
+{
+	this._connection.open(function(err, mongoclient){
+		mongoclient.collection("acao", function(err, collection){
+			collection.find({usuario : usuario}).toArray(function(err, result){
+				res.render('pergaminhos', {acoes : result});
+			});
+
+			//Finaliza a conexão com o banco
+			mongoclient.close();
+		});
+	}); 
+}
+
 
 module.exports = function(){
 	return JogoDAO;

@@ -64,10 +64,36 @@ JogoDAO.prototype.acao = function(acao)
 
 			//Insere, um JSON, no banco
 			collection.insert(acao);
+		});
+
+		mongoclient.collection("jogo", function(err, collection){
+
+			var moedas = null;
+			switch(parseInt(acao.acao))
+			{
+				case 1: 
+					moedas = -2 * parseInt(acao.quantidade);
+					break;
+				case 2:
+					moedas = -3 * parseInt(acao.quantidade);
+					break;
+				case 3: 
+					moedas = -1 * parseInt(acao.quantidade);
+					break;
+				case 4: 
+					moedas = -1 * parseInt(acao.quantidade);
+					break;
+			}
+
+			collection.update(
+				{ usuario : acao.usuario },
+				{ $inc: {moeda: moedas} },
+				{ multi: false }
+				);
 
 			//Finaliza a conexão com o banco
 			mongoclient.close();
-		});
+			});
 	}); 
 }
 

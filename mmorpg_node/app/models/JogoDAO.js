@@ -1,3 +1,5 @@
+var ObjectId = require('mongodb').ObjectId;
+
 function JogoDAO(connection)
 {
 	this._connection = connection();
@@ -72,17 +74,17 @@ JogoDAO.prototype.acao = function(acao)
 			switch(parseInt(acao.acao))
 			{
 				case 1: 
-					moedas = -2 * parseInt(acao.quantidade);
-					break;
+				moedas = -2 * parseInt(acao.quantidade);
+				break;
 				case 2:
-					moedas = -3 * parseInt(acao.quantidade);
-					break;
+				moedas = -3 * parseInt(acao.quantidade);
+				break;
 				case 3: 
-					moedas = -1 * parseInt(acao.quantidade);
-					break;
+				moedas = -1 * parseInt(acao.quantidade);
+				break;
 				case 4: 
-					moedas = -1 * parseInt(acao.quantidade);
-					break;
+				moedas = -1 * parseInt(acao.quantidade);
+				break;
 			}
 
 			collection.update(
@@ -93,7 +95,7 @@ JogoDAO.prototype.acao = function(acao)
 
 			//Finaliza a conexão com o banco
 			mongoclient.close();
-			});
+		});
 	}); 
 }
 
@@ -114,6 +116,20 @@ JogoDAO.prototype.getAcoes = function(usuario, res)
 	}); 
 }
 
+JogoDAO.prototype.revogar_acao = function(_id, res)
+{
+	this._connection.open(function(err, mongoclient){
+		mongoclient.collection("acao", function(err, collection){
+			collection.remove(
+				{_id : ObjectId(_id)},
+				function(err, result){
+					res.redirect('jogo?msg=D');
+					mogoclient.close();
+				}
+			);
+		});
+	}); 
+}
 
 module.exports = function(){
 	return JogoDAO;

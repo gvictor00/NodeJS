@@ -12,7 +12,7 @@ module.exports.autenticar = function(application,req,res){
 
 	if(erros)
 	{
-		res.render("index", {validacao:erros});
+		res.render("index", {validacao: erros});
 		return;
 	}
 

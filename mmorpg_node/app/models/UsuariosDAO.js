@@ -41,9 +41,9 @@ UsuariosDAO.prototype.autenticar = function(usuario, req, res)
 					res.redirect("jogo");
 				}
 				else
-				{		
+				{	
 					//res.send("Usuario Não encontrado");
-					res.render("index",{validacao:{}});
+					res.render("index",{validacao: {}});
 				}
 			});
 

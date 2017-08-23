@@ -1,3 +1,6 @@
+/* Importar o módulo do crypto */
+var crypto = require("crypto");
+
 function UsuariosDAO(connection){
 	// Executa função de conexão com o banco
 	// this._ indica que a variável só deve ser utilizada dentro do contexto do módulo
@@ -9,6 +12,15 @@ UsuariosDAO.prototype.inserirUsuario = function(usuario){
 	this._connection.open(function(err, mongoclient){
 		//Permite manipular documentos dentro das coleções
 		mongoclient.collection("usuarios", function(err, collection){
+			
+			//createHash(método)
+			//.update(info) - Atualiza a info
+			//.digest(forma de upload) - Digere as informações e cria a hash
+			var senha_criptograda = crypto.createHash("md5").update(usuario.senha).digest("hex");
+
+			//Sobrescreve a chave senha
+			usuario.senha = senha_criptograda;
+			
 			//Insere, um JSON, no banco
 			collection.insert(usuario);
 
@@ -24,6 +36,10 @@ UsuariosDAO.prototype.autenticar = function(usuario, req, res)
 	this._connection.open(function(err, mongoclient){
 		//Permite manipular documentos dentro das coleções
 		mongoclient.collection("usuarios", function(err, collection){
+			
+			var senha_criptograda = crypto.createHash("md5").update(usuario.senha).digest("hex");
+			usuario.senha = senha_criptograda;
+			
 			//Consulta se o usuário fornecido encontra-se no banco
 			//collection.find({usuario: {eq: usuario.usuario}, senha:{$eq: usuario.senha}});
 			collection.find(usuario).toArray(function(err, result){
@@ -41,9 +57,9 @@ UsuariosDAO.prototype.autenticar = function(usuario, req, res)
 					res.redirect("jogo");
 				}
 				else
-				{	
+				{		
 					//res.send("Usuario Não encontrado");
-					res.render("index",{validacao: {}});
+					res.render("index",{validacao:{}});
 				}
 			});
 

@@ -20,6 +20,21 @@ O Express-Session serve para criar uma sessão enquanto o navegador estiver aber
 $ npm install express-session --save
 ```
 
+### Instalando e utilizando o Crypto
+O Crypto é um módulo usado para fazer criptografia de informações.
+
+```shell
+$ npm install crypto --save
+```
+
+No código, foi usado o crypto para fazer interface de codificação (MD5) das informações de senha dos usuários no banco.
+
+```javascript
+			var senha_criptograda = crypto.createHash("md5").update(usuario.senha).digest("hex");
+```
+
+Para mais informações sobre o módulo, [Clique aqui](https://nodejs.org/api/crypto.html).
+
 ## Observações
 
 ### Configurando Path no Windows

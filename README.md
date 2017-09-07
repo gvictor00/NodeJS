@@ -13,3 +13,6 @@ Ainda em desenvolvimento, consiste em um Chat com Várias salas, baseado em WebS
 ## Atividade #3: MMORPG
 
 Desenvolvimento de um MMORPG baseado em Game of Thrones para pratica de conteúdos relacionados à armazenamento e manipulação de dados utilizando MongoDB.
+
+## Atividade #4: Content Negotiation e Status Code
+

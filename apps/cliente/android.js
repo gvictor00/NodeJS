@@ -4,7 +4,7 @@ var opcoes = {
 	hostname: 'localhost',
 	port: '80',
 	path: '/',
-	method: 'post',
+	method: 'get',
 	headers: {
 		// Envia o que o cliente espera receber
 		//'Accept' : 'text/html'
@@ -14,12 +14,12 @@ var opcoes = {
 
 	}
 }
-
+/*
 //Content-type
 var html = 'nome=José'; //x-www-form-urlencoded
 var json = {nome : 'José'};
 var string_json = JSON.stringify(json);
-
+*/
 var buffer_corpo_response = [];
 
 // Permite requisição via GET (Request)
@@ -35,6 +35,7 @@ var req = http.request(opcoes,function(res){
 	res.on('end', function(){
 		var corpo_response = Buffer.concat(buffer_corpo_response).toString();
 		console.log(corpo_response);
+		console.log(res.statusCode);
 	});
 
 	res.on('error', function(){
@@ -44,6 +45,6 @@ var req = http.request(opcoes,function(res){
 
 //Anexa string no request
 //req.write(html);
-req.write(string_json);
+//req.write(string_json);
 //Envia a instância do objeto
 req.end();

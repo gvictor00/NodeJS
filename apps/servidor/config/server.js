@@ -34,5 +34,24 @@ consign()
 	.then('app/controllers')
 	.into(app);
 
+/* middleware que configura páginas de status */
+app.use(function(req, res, next){
+
+	res.status(404).render("erros/404");
+	//res.status(404).send('Página não encontrada');
+
+	//Não mata o processo caso ocorra algum erro
+	next();
+});
+
+/* middleware que configura as mensagens de erros internos */
+app.use(function(err, req, res, next){
+
+	res.status(500).render("erros/500");
+
+	//Não mata o processo caso ocorra algum erro
+	next();
+});
+
 /* exportar o objeto app */
 module.exports = app;

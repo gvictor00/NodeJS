@@ -4,17 +4,26 @@ var opcoes = {
 	hostname: 'localhost',
 	port: '80',
 	path: '/',
+	method: 'post',
 	headers: {
 		// Envia o que o cliente espera receber
 		//'Accept' : 'text/html'
-		'Accept' : 'application/json'
+		'Accept' : 'application/json',
+		//'Content-type' : 'application/x-www-form-urlencoded'
+		'Content-type' : 'application/json'
+
 	}
 }
 
+//Content-type
+var html = 'nome=José'; //x-www-form-urlencoded
+var json = {nome : 'José'};
+var string_json = JSON.stringify(json);
+
 var buffer_corpo_response = [];
 
-// Permite requisição via GET
-http.get(opcoes,function(res){
+// Permite requisição via GET (Request)
+var req = http.request(opcoes,function(res){
 	// ON = while loading
 	res.on('data', function(chunk){
 		buffer_corpo_response.push(chunk);
@@ -32,3 +41,9 @@ http.get(opcoes,function(res){
 
 	});
 });
+
+//Anexa string no request
+//req.write(html);
+req.write(string_json);
+//Envia a instância do objeto
+req.end();

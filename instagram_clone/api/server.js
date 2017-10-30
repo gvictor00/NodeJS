@@ -2,12 +2,16 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var mongodb = require('mongodb');
 var objectId = require('mongodb').ObjectId;
-
+var multiparty = require('connect-multiparty');
+var fs = require('fs'); // Modulo nativo que permite manipular arquivos
 var app = express();
 
 //body-parser
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
+
+//Executar o Connect Multiparty
+app.use(multiparty());
 
 var port = 3000;
 
@@ -31,23 +35,53 @@ app.get('/',function(req, res){
 //POST {create}
 app.post('/api', function(req, res){
 
-	var dados = req.body;
+	// Habilita a API para fornecer o res para qualquer dominio
+	// Cossdomain application
+	res.setHeader("Access-Control-Allow-Origin", "*");
 
-	db.open(function(err, mongoclient){
-		mongoclient.collection('postagens', function(err, collection){
-			collection.insert(dados, function(err, records){
-				if(err){
-					res.json(err);
-				}
-				else
-				{
-					res.json(records);
-				}
-				mongoclient.close();
+	var date = new Date();
+	time_stamp = date.getTime();
+
+	// Populada pelo Multiparty quando uma requisição contém arquivos
+	//console.log(req.files);
+
+	var url_imagem = time_stamp + '_' + req.files.arquivo.originalFilename;
+
+	// Fornece o caminho origem para o arquivo
+	var path_origem = req.files.arquivo.path;
+
+	// Fornece o caminho para o destino do arquivo
+	var path_destino = './uploads/' + url_imagem;
+
+
+	fs.rename(path_origem, path_destino, function(err)
+	{
+		if(err)
+		{
+			res.status(500).json({error : err});
+			return;
+		}
+
+		var dados = {
+			url_imagem: url_imagem,
+			titulo: req.body.titulo
+		}
+
+		db.open(function(err, mongoclient){
+			mongoclient.collection('postagens', function(err, collection){
+				collection.insert(dados, function(err, records){
+					if(err){
+						res.json({'status':'erro'});
+					}
+					else
+					{
+						res.json({'status':'Inclusao realizada com sucesso'});
+					}
+					mongoclient.close();
+				});
 			});
-		});
-	})
-	//res.send(dados);
+		})
+	});
 });
 
 //GET
